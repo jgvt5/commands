@@ -10,6 +10,7 @@ const DEFAULT_N_LINES: i32 = 10;
 
 fn make_opt() -> Options {
     let mut opts = Options::new();
+    opts.optflag("", "help", "print this help menu");
     opts.optopt(
         "c",
         "bytes",
@@ -22,9 +23,8 @@ fn make_opt() -> Options {
         "print the first NUM lines of each file",
         "NUM",
     );
-    opts.optflag("h", "help", "print this help menu");
-    opts.optflag("q", "quiet", "unko");
-    opts.optflag("v", "quiet", "unko");
+    opts.optflag("q", "quiet", " never print headers giving file names");
+    opts.optflag("v", "verbose", "always print headers giving file names");
     opts
 }
 
@@ -36,7 +36,7 @@ fn main() {
         Ok(m) => m,
         Err(f) => panic!(f.to_string()),
     };
-    if matches.opt_present("h") {
+    if matches.opt_present("help") {
         do_head::print_usage(&program, opts);
         return;
     }
