@@ -28,3 +28,16 @@ fn mkdir(dirname: &str) {
         Err(e) => println!("{}", e),
     }
 }
+
+//　↓無みたいなコード
+fn rm(filename: &str) {
+    fs::remove_file(filename).expect("Can't remove file")
+}
+
+fn rmdir(dirname: &str) {
+    fs::remove_dir(dirname).expect("Can't remove directory")
+}
+
+fn ln(linkname: &str, dstname: &str) {
+    fs::hard_link(linkname, dstname).expect("Can't make hard link")
+}
